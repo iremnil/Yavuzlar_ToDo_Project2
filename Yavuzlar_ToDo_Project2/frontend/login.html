@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body class="auth-sayfasi">
+    
+    <div class="auth-baslik">Görevlerine kaldığın yerden devam et</div>
+    
+    <div class="konteynir auth-konteynir">
+        <h2>Hoş Geldin 👋</h2>
+        <p class="auth-alt-metin">Devam etmek için giriş yap</p>
+        
+        <div class="auth-form">
+            <input type="text" id="username" placeholder="Kullanıcı Adı">
+            <input type="password" id="password" placeholder="Şifre">
+            <button class="auth-btn" onclick="login()">Giriş Yap</button>
+        </div>
+        
+        <p class="auth-yonlendirme">Hesabın yok mu? <a href="/register.html">Kayıt Ol</a></p>
+    </div>
+
+    <script>
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/v1/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password }),
+                    credentials: 'include' 
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    window.location.href = "/";
+                } else {
+                    alert("Hata: " + data.mesaj);
+                }
+            } catch (error) {
+                console.error("Bağlantı hatası:", error);
+                alert("Sunucuya ulaşılamadı!");
+            }
+        }
+    </script>
+</body>
+</html>

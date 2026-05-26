@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: yavuzlar_db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tododb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d tododb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dev.backend.Dockerfile
+    container_name: yavuzlar_backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app/backend
+      - ./frontend:/app/frontend
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: tododb
+      DB_PORT: 5432
+    depends_on:
+      db:
+        condition: service_healthy # DB'nin tamamen "sağlıklı" olmasını 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dev.frontend.Dockerfile
+    container_name: yavuzlar_frontend
+    ports:
+      - "80:80" # Frontend 80 portundan çalışacak 
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  

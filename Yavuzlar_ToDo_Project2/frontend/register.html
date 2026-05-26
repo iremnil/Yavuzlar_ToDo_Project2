@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body class="auth-sayfasi">
+    
+    <div class="auth-baslik">Görevlerini oluşturmak ve takip edebilmek için hemen kayıt ol</div>
+    
+    <div class="konteynir auth-konteynir">
+        <h2>Aramıza Katıl 🚀</h2> 
+        <p class="auth-alt-metin">Bilgilerini girerek hesabını oluştur</p>
+        
+        <div class="auth-form">
+            <input type="text" id="username" placeholder="Kullanıcı Adı">
+            <input type="password" id="password" placeholder="Şifre">
+            <button class="auth-btn" onclick="kayitOl()">Kayıt Ol</button>
+        </div>
+        
+        <p class="auth-yonlendirme">Zaten hesabın var mı? <a href="/login.html">Giriş Yap</a></p>
+    </div>
+
+    <script>
+        async function kayitOl() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/v1/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.mesaj);
+                } else {
+                    alert(data.mesaj); 
+                    window.location.href = "/login.html"; 
+                }
+            } catch (err) {
+                alert("Sunucuya ulaşılamadı!");
+            }
+        }
+    </script>
+</body>
+</html>

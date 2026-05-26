@@ -1,0 +1,308 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, 
+        #80c4c2 0%,    
+        #80c4c2 30%,   
+        #eebbbb 45%,  
+        #cbb0b0 55%,   
+        #80c4c2 70%,   
+        #80c4c2 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientBG 30s ease infinite;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px; 
+    padding: 40px 20px;
+}
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/*sol panel hosgeldın ve daire*/
+.ust-bilgi {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px 40px; 
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5), 0 0 20px rgba(162, 228, 225, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    gap: 25px;
+    animation: asagiKay 0.5s ease;
+    order: 1; /* Esnek düzende solda*/
+}
+@keyframes asagiKay {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.karsilama-alani { display: flex; flex-direction: column; gap: 8px; }
+#karsilama { font-size: 18px; font-weight: 700; color: #2c3e50; margin: 0; }
+#tarihSaat { font-size: 13px; font-weight: 600; color: #7f8c8d; line-height: 1.4; }
+#saat { font-size: 22px; color: #3498db; font-weight: 800; text-shadow: 0 0 10px rgba(52, 152, 219, 0.3); }
+.ilerleme-kutusu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: none; 
+    border-top: 1px solid rgba(0, 0, 0, 0.08); 
+    padding-left: 0;
+    padding-top: 20px;
+    width: 100%;
+}
+.daire-dis {
+    width: 120px;  
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(#eee 100%, #eee 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+    transition: background 0.4s ease;
+}
+.daire-ic {
+    width: 90px;  
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#ilerlemeYuzde { font-size: 30px; font-weight: 900; color: #2c3e50; }
+.ilerleme-metin { font-size: 12px; color: #7f8c8d; margin-top: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; }
+/* gorev lıstesı kutusu */
+.konteynir {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px; 
+    border-radius: 12px;
+    width: 100%; 
+    max-width: 850px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 50px rgba(162, 228, 225, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    order: 2; /* Esnekte ıkıncı sırada */
+}
+h1 { text-align: center; color: #444; margin-bottom: 20px; }
+/* giris ve arama alanları */
+.ekleme-alani, .arama-alani { display: flex; margin-bottom: 15px; }
+input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+input:focus { border-color: #a2e4e1; box-shadow: 0 0 15px rgba(162, 228, 225, 0.8); }
+#ekleBtn {
+    background-color: #f39c12; 
+    color: white;
+    border: none;
+    padding: 10px 25px; 
+    margin-left: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+#ekleBtn:hover { background-color: #d35400; box-shadow: 0 0 15px rgba(243, 156, 18, 0.8), 0 0 25px rgba(243, 156, 18, 0.5); }
+/*görev lıstesı*/
+ul { padding: 0; margin: 0; }
+li {
+    display: grid;
+    grid-template-columns: 40px 1fr 110px 160px; 
+    align-items: center;
+    padding: 12px 5px;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+}
+.sira-no { color: #888; font-weight: 500; }
+.gorev-metni { color: #333; font-weight: 500; padding-right: 10px; }
+.status-btn {
+    padding: 6px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid #ddd;   /*durum buton*/
+    cursor: pointer;
+    width: 95px;
+    transition: all 0.3s ease;
+}
+.durum-yapilacak { background-color: #fcf8e3; color: #6c614e; border-color: #ece5d0; }
+.durum-yapilacak:hover { box-shadow: 0 0 12px rgba(138, 122, 95, 0.5); }
+.durum-devam { background-color: #fff9c4; color: #b08d00; border-color: #f0e68c; }
+.durum-devam:hover { box-shadow: 0 0 12px rgba(211, 84, 0, 0.6); }
+.durum-tamamlandi { background-color: #e8f5e9; color: #2e7d32; border-color: #c8e6c9; }
+.durum-tamamlandi:hover { box-shadow: 0 0 12px rgba(46, 125, 50, 0.6); }
+
+.btn-grup { display: flex; gap: 8px; justify-content: flex-end; }
+.edit-btn, .delete-btn {
+    padding: 8px 18px; 
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: white; 
+    transition: all 0.3s ease;
+}
+.edit-btn { background-color: #3498db; }
+.edit-btn:hover { background-color: #2980b9; box-shadow: 0 0 15px rgba(52, 152, 219, 0.8), 0 0 25px rgba(52, 152, 219, 0.5); }
+.delete-btn { background-color: #e74c3c; }
+.delete-btn:hover { background-color: #c0392b; box-shadow: 0 0 15px rgba(231, 76, 60, 0.8), 0 0 25px rgba(231, 76, 60, 0.5); }
+.edit-btn:active, .delete-btn:active, #ekleBtn:active, .status-btn:active { transform: scale(0.95); }
+
+#logoutBtn {
+    background-color: #ff6b81;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 107, 129, 0.4);
+    transition: all 0.3s ease;
+    order: 3;
+    align-self: flex-start; /*kaymaması ıcın*/
+}
+#logoutBtn:hover {
+    background-color: #ff4757;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 107, 129, 0.8), 0 0 25px rgba(255, 107, 129, 0.5);
+}
+
+/* modal ayarı*/
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+.modal-icerik { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; width: 320px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.3); animation: modalAnimasyon 0.4s ease; }
+@keyframes modalAnimasyon { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.modal-icerik h3 { margin-top: 0; color: #333; }
+#modalInput { width: 90%; padding: 10px; margin: 15px 0; border: 1px solid #ddd; border-radius:6px; }
+.modal-butonlar { display: flex; gap: 10px; justify-content: center; }
+.modal-kaydet { background-color: #3498db; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; }
+.modal-kaydet:hover { background-color: #2980b9; }
+.modal-iptal { background-color: #eee; color: #555; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; }
+.modal-iptal:hover { background-color: #ddd; }
+.modal-sil { background-color: #e74c3c; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+.modal-sil:hover { background-color: #c0392b; }
+
+/* ekran kuculunce duzgun gozukmesı ıcın*/
+@media (max-width: 1400px) {
+    /*Ekran panelleri yan yana tutamayacak kadar daraldığında panelleri tam ortaya al ve hizala */
+    body {
+        flex-direction: column;
+        align-items: center;
+    }
+    .ust-bilgi {
+        width: 100%;
+        max-width: 850px;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 20px;
+    }
+    .ilerleme-kutusu {
+        border-top: none;
+        border-left: 1px solid rgba(0, 0, 0, 0.08);
+        padding-top: 0;
+        padding-left: 20px;
+        width: auto;
+    }
+    .daire-dis { width: 80px; height: 80px; }
+    .daire-ic { width: 60px; height: 60px; }
+    #ilerlemeYuzde { font-size: 20px; }
+    
+    #logoutBtn {
+        width: 100%;
+        max-width: 850px;
+        text-align: center;
+        align-self: center;
+    }
+}
+
+/*gırıs ve kayıt sayfaları ıcın*/
+.auth-sayfasi {
+    flex-direction: column !important; 
+    align-items: center; 
+    padding-top: 2vh !important; 
+}
+.auth-konteynir {
+    width: 400px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 30px;
+}
+.auth-konteynir h2 { margin-top: 0; margin-bottom: 5px; color: #2c3e50; }
+.auth-alt-metin { color: #7f8c8d; font-size: 14px; margin-bottom: 25px; }
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px; 
+}
+.auth-form input {
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 12px 15px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.9);
+}
+.auth-btn {
+    background-color: #3498db; 
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+.auth-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.8), 0 0 25px rgba(52, 152, 219, 0.5);
+}
+
+.auth-yonlendirme { margin-top: 25px; font-size: 14px; color: #7f8c8d; }
+.auth-yonlendirme a { color: #3498db; text-decoration: none; font-weight: bold; }
+.auth-yonlendirme a:hover { text-decoration: underline; }
+.auth-baslik {
+    font-family: 'Poppins', sans-serif; 
+    color: #3498db; 
+    font-size: 22px; 
+    font-weight: 600; 
+    text-align: center;
+    margin-bottom: 20px; 
+    width: 100%; 
+    display: block; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    animation: asagiKay 0.5s ease-out, pariltiEfekti 1.5s ease-in-out infinite alternate; 
+}
+/* Hafif parıltı animasyonu */
+@keyframes pariltiEfekti {
+    from { text-shadow: 0 0 10px rgba(52, 152, 219, 0.2); }
+    to { text-shadow: 0 0 20px rgba(52, 152, 219, 0.7), 0 0 30px rgba(52, 152, 219, 0.5); }
+}
+
+@media (max-width: 500px) {
+    .auth-baslik {
+        font-size: 18px;
+    }
+}
